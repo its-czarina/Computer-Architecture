@@ -55,7 +55,6 @@ public class Endian {
             for (String s:inputs){
                 if (!mp.isNumber(s)){
                     for (int j = 0, i = 0; i < s.length(); j++){
-                        System.out.println(i +"  " + currLine + " " + j + " " + s.charAt(i));
                         bigEndian[currLine][j] = s.charAt(i++) + "";
                         if (j == 3 && i < s.length()){ 
                             j = -1;
@@ -84,7 +83,6 @@ public class Endian {
             for (String s:inputs){
                 if (!mp.isNumber(s)){
                     for (int j = 3, i = 0; i < s.length(); j--){
-                        System.out.println(i +"  " + currLine + " " + j + " " + s.charAt(i));
                         littleEndian[currLine][j] = s.charAt(i++) + "";
                         if (j == 0 && i < s.length()){
                             j = 4;
@@ -104,39 +102,29 @@ public class Endian {
                 }
             }
             
-            System.out.println("");
-            System.out.println("BIG ENDIAN");
-            System.out.println("\t------------------------------------------------------------------");
-            for (int i = 0; i < bigEndian.length; i++){
-                //System.out.print("||\t");
-                for (int j = 0; j < bigEndian[0].length; j++){
-                    if (bigEndian[i][j]==null)
-                        System.out.print("\t||\t0");
-                    else
-                        System.out.print("\t||\t" + bigEndian[i][j]);
-                }
-                System.out.print("\t||");
-                System.out.println("");
-                System.out.println("\t------------------------------------------------------------------");
-            }
-            System.out.println("");
-            System.out.println("LITTLE ENDIAN");
-            System.out.println("\t------------------------------------------------------------------");
-            for (int i = 0; i < littleEndian.length; i++){
-                //System.out.print("||\t");
-                for (int j = 0; j < littleEndian[0].length; j++){
-                    if (littleEndian[i][j]==null)
-                        System.out.print("\t||\t0");
-                    else
-                        System.out.print("\t||\t" + littleEndian[i][j]);
-                }
-                System.out.print("\t||");
-                System.out.println("");
-                System.out.println("\t------------------------------------------------------------------");
-            }
+            mp.printArrays(bigEndian, "BIG ENDIAN");
+            mp.printArrays(littleEndian, "LITTLE ENDIAN");
                             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Endian.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void printArrays(String[][] Endian, String title){
+        System.out.println("");
+        System.out.println(title);
+        System.out.println("\t------------------------------------------------------------------");
+        for (int i = 0; i < Endian.length; i++){
+            //System.out.print("||\t");
+            for (int j = 0; j < Endian[0].length; j++){
+                if (Endian[i][j]==null)
+                    System.out.print("\t||\t0");
+                else
+                    System.out.print("\t||\t" + Endian[i][j]);
+            }
+            System.out.print("\t||");
+            System.out.println("");
+            System.out.println("\t------------------------------------------------------------------");
         }
     }
     
